@@ -1,0 +1,19 @@
+@echo off
+chcp 65001 >nul
+echo ========================================
+echo    ESP32 气象站 - PC 模拟器 (普中版)
+echo ========================================
+echo.
+echo 正在启动模拟器...
+echo.
+
+python weather_station_puzhong.py
+
+if %errorlevel% neq 0 (
+    echo.
+    echo [错误] 启动失败！
+    echo.
+    echo 请确保已安装 Python
+    echo.
+    pause
+)

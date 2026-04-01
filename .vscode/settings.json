@@ -1,0 +1,16 @@
+{
+    "C_Cpp.default": {
+        "compilerPath": "platformio",
+        "cStandard": "c11",
+        "cppStandard": "c++17",
+        "intelliSenseMode": "gcc-arm"
+    },
+    "editor.formatOnSave": true,
+    "editor.tabSize": 4,
+    "files.associations": {
+        "*.h": "cpp",
+        "*.ino": "cpp"
+    },
+    "platformio-ide.useBuiltinPackageManager": true,
+    "platformio-ide.autoPreloadEnvVars": true
+}
