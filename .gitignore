@@ -7,6 +7,17 @@ libdeps/
 .vscode/c_cpp_properties.json
 .vscode/launch.json
 .vscode/ipch/
+.vscode/settings.json
+.vscode/tasks.json
+
+# Build and Binary
+*.bin
+*.elf
+*.map
+*.hex
+*.a
+*.o
+*.d
 
 # Python
 __pycache__/
@@ -14,7 +25,24 @@ __pycache__/
 *$py.class
 venv/
 .env
+.venv/
+env/
+dist/
+build/
+*.egg-info/
 
 # OS
 .DS_Store
 Thumbs.db
+Desktop.ini
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Other
+node_modules/
+temp/
+tmp/
