@@ -34,11 +34,13 @@ esp32-ai-projects/
 
 | 项目 | 难度 | 所需硬件 | 状态 | 核心功能 |
 |------|------|----------|------|---------|
-| [智能家居控制](projects/smart-home/) | ⭐⭐ | ESP32, 继电器×4, OLED | ✅ 完成 | Web控制台, 4路继电器, JSON API |
+| [智能家居控制](projects/smart-home/) | ⭐⭐ | ESP32, 继电器×4, OLED | ✅ 完成 | Web控制台, 4路继电器, **MQTT+HA**, JSON API |
 | [气象站](projects/weather-station/) | ⭐⭐ | ESP32, DHT22, OLED | ✅ 完成 | 温湿度, Web展示, NTP时间 |
 | [声音/拍手控制](projects/voice-control/) | ⭐⭐ | ESP32, MAX9814麦克风 | ✅ 完成 | 拍手识别, 设备控制, 波形显示 |
 | [手势识别控制](projects/gesture-control/) | ⭐⭐⭐ | ESP32, APDS-9960 | ✅ 完成 | 手势方向识别, PWM调光, 设备控制 |
 | [AI 摄像头](projects/ai-camera/) | ⭐⭐⭐⭐ | ESP32-CAM | ✅ 完成 | MJPEG视频流, 截图, Web控制 |
+| [IR 红外遥控](projects/ir-blaster/) | ⭐⭐ | ESP32, IR LED, VS1838B | ✅ 完成 | 学码/发射, **空调/电视控制**, MQTT |
+| [RF 433MHz 网关](projects/rf-gateway/) | ⭐⭐ | ESP32, 433MHz收发模块 | ✅ 完成 | 学码/发射, **接管市售插座**, MQTT+HA |
 
 ---
 
@@ -159,6 +161,7 @@ pio device monitor
 
 | 文档 | 内容 |
 |------|------|
+| [**智能家居调研报告**](docs/smart-home-research.md) | ESP32接入智能家居6大方案对比、选型指南 |
 | [硬件连接指南](docs/guides/hardware-setup.md) | 引脚图、接线说明 |
 | [环境搭建指南](docs/setup-guide.md) | PlatformIO 安装配置 |
 | [固件烧录指南](docs/upload-guide.md) | 上传方法与常见问题 |
