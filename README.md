@@ -12,12 +12,18 @@
 
 ```
 esp32-ai-projects/
-├── projects/              # 具体项目（各自独立）
-│   ├── smart-home/        # ✅ 智能家居控制
-│   ├── weather-station/   # ✅ 气象站（含模拟器）
+├── simulator/             # 🖥️ 统一演示平台（无需硬件）
+│   ├── esp32_demo.py      #   全项目 All-in-One 演示器
+│   ├── run_demo.bat       #   Windows 一键启动
+│   └── run_demo.sh        #   Linux/Mac 启动
+├── projects/              # 具体项目（各自独立，含模拟器）
+│   ├── smart-home/        # ✅ 智能家居控制（MQTT+HA）
+│   ├── weather-station/   # ✅ 气象站
 │   ├── voice-control/     # ✅ 声音/拍手控制
 │   ├── gesture-control/   # ✅ 手势识别控制
-│   └── ai-camera/         # ✅ ESP32-CAM 网络摄像头
+│   ├── ai-camera/         # ✅ ESP32-CAM 网络摄像头
+│   ├── ir-blaster/        # ✅ IR 红外万能遥控
+│   └── rf-gateway/        # ✅ RF 433MHz 智能网关
 ├── components/            # 可复用组件库
 │   ├── pin-config.h       # 普中 ESP32 引脚定义
 │   ├── wifi-manager/      # WiFi 管理
@@ -25,6 +31,7 @@ esp32-ai-projects/
 │   ├── sensor-utils/      # 传感器工具（DHT22）
 │   └── button-handler/    # 按钮处理
 ├── docs/                  # 文档与指南
+│   └── smart-home-research.md  # 智能家居全方案调研
 └── .vscode/               # VSCode 配置
 ```
 
@@ -41,6 +48,20 @@ esp32-ai-projects/
 | [AI 摄像头](projects/ai-camera/) | ⭐⭐⭐⭐ | ESP32-CAM | ✅ 完成 | MJPEG视频流, 截图, Web控制 |
 | [IR 红外遥控](projects/ir-blaster/) | ⭐⭐ | ESP32, IR LED, VS1838B | ✅ 完成 | 学码/发射, **空调/电视控制**, MQTT |
 | [RF 433MHz 网关](projects/rf-gateway/) | ⭐⭐ | ESP32, 433MHz收发模块 | ✅ 完成 | 学码/发射, **接管市售插座**, MQTT+HA |
+
+---
+
+## 🖥️ 在线 Demo（无需硬件）
+
+所有项目均有 Python 模拟器，在 PC 上即可体验完整功能：
+
+```bash
+# 一键启动（Windows 双击 simulator/run_demo.bat）
+cd simulator
+python esp32_demo.py
+```
+
+包含 6 个交互标签页 + HTTP API。详见 [simulator/README.md](simulator/README.md)
 
 ---
 
@@ -183,10 +204,16 @@ DHT22:   DATA=4
 PWM LED: GPIO13
 蜂鸣器:  GPIO25
 板载LED: GPIO2
+IR发射:  GPIO19（三极管驱动）
+IR接收:  GPIO18（VS1838B）
+RF发射:  GPIO17（STX882/FS1000A）
+RF接收:  GPIO16（SRX882/MX-RM-5V）
 
 ⚠️ 禁用引脚：GPIO6-11（Flash）
 ⚠️ WiFi时避免：ADC2引脚（GPIO0,2,4,12-15）
 ⚠️ 仅输入：GPIO34-39
+⚠️ APDS-9960 仅接 3.3V！
+⚠️ IR发射必须用三极管（S8050）放大
 ```
 
 ---
