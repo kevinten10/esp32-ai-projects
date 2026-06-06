@@ -8,6 +8,20 @@
 
 ---
 
+## ✅ 当前交付状态
+
+本仓库目前已经完成 **固件编译验证 + 模拟器运行验证 + GitHub 合并收尾**：
+
+- 7 个子项目均可使用 PlatformIO 编译。
+- 气象站提供默认版和普中 ESP32 专用版两套构建配置。
+- 统一 Python 模拟器可在无硬件时演示主要功能，并提供本地 HTTP API。
+- `components/pin-config.h` 维护普中 ESP32 的共享引脚定义。
+- 实机上传需要 ESP32 开发板通过 USB 连接到当前电脑后再执行。
+
+> **验证边界**: 仓库已做编译和模拟器验证；未连接实物板时，不能视为已完成硬件烧录和传感器实测。
+
+---
+
 ## 📁 项目结构
 
 ```
@@ -31,6 +45,9 @@ esp32-ai-projects/
 │   ├── sensor-utils/      # 传感器工具（DHT22）
 │   └── button-handler/    # 按钮处理
 ├── docs/                  # 文档与指南
+│   ├── verification.md    # 构建/模拟器/仓库状态验证
+│   ├── setup-guide.md     # 开发环境配置
+│   ├── upload-guide.md    # 硬件连接与上传
 │   └── smart-home-research.md  # 智能家居全方案调研
 └── .vscode/               # VSCode 配置
 ```
@@ -51,7 +68,7 @@ esp32-ai-projects/
 
 ---
 
-## 🖥️ 在线 Demo（无需硬件）
+## 🖥️ 本地 Demo（无需硬件）
 
 所有项目均有 Python 模拟器，在 PC 上即可体验完整功能：
 
@@ -62,6 +79,20 @@ python esp32_demo.py
 ```
 
 包含 6 个交互标签页 + HTTP API。详见 [simulator/README.md](simulator/README.md)
+
+---
+
+## 🔍 验证方式
+
+项目验证分三层：
+
+| 层级 | 是否需要硬件 | 目的 | 入口 |
+|------|--------------|------|------|
+| 模拟器验证 | 否 | 验证 Python 演示平台和 HTTP API | `python simulator/esp32_demo.py` |
+| 固件编译验证 | 否 | 验证 ESP32 固件能生成 `.bin` | `pio run -d projects/<name>` |
+| 实机上传验证 | 是 | 烧录到开发板并查看串口日志 | `pio run --target upload` |
+
+完整命令见 [验证指南](docs/verification.md)。
 
 ---
 
@@ -77,19 +108,23 @@ python esp32_demo.py
 
 ```bash
 # 1. 克隆项目
-git clone <仓库地址>
+git clone https://github.com/kevinten10/esp32-ai-projects.git
 cd esp32-ai-projects
 
-# 2. 进入要开发的项目
-cd projects/smart-home
+# 2. 无硬件先运行统一模拟器
+python simulator/esp32_demo.py
 
-# 3. 修改 WiFi 配置（编辑 src/main.cpp）
+# 3. 编译某个固件项目
+pio run -d projects/smart-home
+
+# 4. 准备实机上传时，先修改 WiFi 配置（编辑项目 src/main.cpp）
 # 将 YOUR_WIFI_SSID 和 YOUR_WIFI_PASSWORD 改为你的网络
 
-# 4. 编译并上传
+# 5. ESP32 已通过 USB 连接后，进入项目目录上传
+cd projects/smart-home
 pio run --target upload
 
-# 5. 查看串口日志（115200 波特率）
+# 6. 查看串口日志（115200 波特率）
 pio device monitor
 ```
 
@@ -186,6 +221,7 @@ pio device monitor
 | [硬件连接指南](docs/guides/hardware-setup.md) | 引脚图、接线说明 |
 | [环境搭建指南](docs/setup-guide.md) | PlatformIO 安装配置 |
 | [固件烧录指南](docs/upload-guide.md) | 上传方法与常见问题 |
+| [验证指南](docs/verification.md) | 编译、模拟器、Git 状态检查 |
 | [AI 开发流程](docs/guides/ai-development.md) | 使用 AI 辅助开发的最佳实践 |
 | [引脚配置文档](docs/puzhong-esp32-config.md) | 普中 ESP32 专用说明 |
 

@@ -64,8 +64,17 @@ COM3 - Silicon Labs CP210x USB to UART Bridge
 
 ### 4. 首次编译测试
 ```bash
-cd projects/weather-station
-pio run
+pio run -d projects/weather-station
+```
+
+### 5. 无硬件模拟器测试
+```bash
+python simulator/esp32_demo.py
+```
+
+如果只想做语法检查，可运行：
+```bash
+python -m py_compile simulator/esp32_demo.py
 ```
 
 ---
@@ -99,10 +108,13 @@ C:\Users\你的用户名\.platformio\penv\Scripts
 
 无需手动下载！PlatformIO 会在首次编译时自动安装：
 
-- `bblanchon/ArduinoJson@^6.21.3`
-- `adafruit/Adafruit SSD1306@^2.5.7`
-- `adafruit/DHT sensor library@^2.1.5`
-- 等
+- `bblanchon/ArduinoJson@^7.2.1`
+- `adafruit/Adafruit SSD1306@^2.5.9`
+- `adafruit/DHT sensor library@^1.4.6`
+- `knolleary/PubSubClient@^2.8`
+- `crankyoldgit/IRremoteESP8266@^2.8.6`
+- `sui77/rc-switch@^2.6.4`
+- `sparkfun/SparkFun APDS9960 RGB and Gesture Sensor@^1.4.3`
 
 ---
 
@@ -112,5 +124,5 @@ C:\Users\你的用户名\.platformio\penv\Scripts
 
 1. 修改 `projects/weather-station/src/main.cpp` 中的 WiFi 配置
 2. 连接 ESP32 到电脑
-3. 运行：`cd projects/weather-station && pio run --target upload`
+3. 运行：`pio run -d projects/weather-station --target upload`
 4. 打开串口监视器：`pio device monitor`
