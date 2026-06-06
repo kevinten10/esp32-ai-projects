@@ -1,5 +1,7 @@
 # ESP32 连接和上传指南
 
+本指南用于 **实机烧录验证**。如果还没有连接 ESP32，可以先运行模拟器和固件编译验证，见 `docs/verification.md`。
+
 ## 📌 步骤 1: 连接硬件
 
 ### USB 连接
@@ -27,7 +29,7 @@
 
 ## 📌 步骤 2: 修改 WiFi 配置
 
-打开 `src/main.cpp`，修改第 22-23 行：
+进入要上传的项目目录，打开 `src/main.cpp`，修改 WiFi 配置：
 
 ```cpp
 const char* WIFI_SSID = "你的 WiFi 名称";      // 改成你的 WiFi 名称
@@ -38,9 +40,9 @@ const char* WIFI_PASSWORD = "你的 WiFi 密码";  // 改成你的 WiFi 密码
 
 ## 📌 步骤 3: 上传代码
 
-### 方法 A: 使用快捷脚本（推荐）
+### 方法 A: 使用项目内快捷脚本
 
-在项目目录双击运行：
+部分项目提供快捷脚本，例如气象站：
 ```
 upload.bat
 ```
@@ -48,8 +50,26 @@ upload.bat
 ### 方法 B: 手动命令
 
 ```bash
-cd D:\projects\hardware\esp32-ai-projects\projects\weather-station
-pio run --target upload
+cd D:\projects\hardware\esp32-ai-projects
+pio run -d projects\weather-station --target upload
+```
+
+其他项目可替换目录名：
+
+```bash
+pio run -d projects\smart-home --target upload
+pio run -d projects\voice-control --target upload
+pio run -d projects\gesture-control --target upload
+pio run -d projects\ai-camera --target upload
+pio run -d projects\ir-blaster --target upload
+pio run -d projects\rf-gateway --target upload
+```
+
+气象站普中专用配置需要在项目目录内指定配置文件：
+
+```bash
+cd projects\weather-station
+pio run -c platformio_puzhong.ini --target upload
 ```
 
 ---
@@ -70,6 +90,12 @@ pio run --target upload
 编辑 `platformio.ini`，添加上传端口：
 ```ini
 upload_port = COM3
+```
+
+也可以临时指定：
+
+```bash
+pio run -d projects\weather-station --target upload --upload-port COM3
 ```
 
 ---

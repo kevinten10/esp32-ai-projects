@@ -59,7 +59,7 @@ esp32-ai-projects/
 │       └── 📄 ai-development.md  # AI 辅助开发流程
 │
 ├── 📂 utils/                  # 🔨 工具脚本
-│   └── (待添加)
+│   └── scripts/               # 初始化脚本
 │
 └── 📂 .vscode/                # VSCode 配置
     ├── 📄 launch.json         # 调试配置
@@ -126,6 +126,14 @@ pio run --target upload
 ### 5. 本地验证
 
 参考 `docs/verification.md` 运行固件构建、模拟器语法检查和最终 diff 检查。
+
+本项目的验证分为三类：
+
+| 类型 | 硬件要求 | 说明 |
+|------|----------|------|
+| 固件编译 | 不需要 | 检查 PlatformIO 项目能否生成固件 |
+| 模拟器运行 | 不需要 | 检查 Python 演示平台、HTTP API 和 UI 初始化 |
+| 实机上传 | 需要 | 烧录到 ESP32 并观察串口日志 |
 
 ---
 

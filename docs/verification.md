@@ -20,6 +20,16 @@ python --version
 
 Note: this Windows environment currently prints a Python `RequestsDependencyWarning` when PlatformIO starts. Builds still complete successfully.
 
+## Hardware Discovery
+
+Use this only when an ESP32 board is connected by USB:
+
+```powershell
+pio device list
+```
+
+Expected: a `COM` device such as `CP210x` or `CH340`. If no port appears, fix the USB cable or driver before uploading.
+
 ## Firmware Builds
 
 ```powershell
@@ -68,7 +78,9 @@ import threading
 import time
 from urllib.request import urlopen
 
-path = r"D:\projects\hardware\esp32-ai-projects\simulator\esp32_demo.py"
+from pathlib import Path
+
+path = Path.cwd() / "simulator" / "esp32_demo.py"
 spec = importlib.util.spec_from_file_location("esp32_demo", path)
 module = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(module)
