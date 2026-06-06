@@ -36,6 +36,7 @@ def add_log(msg):
 
 class Handler(BaseHTTPRequestHandler):
     def do_GET(self):
+        global ac_power, ac_temp, ac_mode
         p = urlparse(self.path).path
         q = parse_qs(urlparse(self.path).query)
         def get(k, d=None): return q.get(k, [d])[0]
@@ -54,7 +55,6 @@ class Handler(BaseHTTPRequestHandler):
         elif p == "/api/ac":
             ok({"power": ac_power, "temp": ac_temp, "mode": ac_mode})
         elif p == "/api/ac/set":
-            global ac_power, ac_temp, ac_mode
             ac_power = get("power", "true") == "true"
             ac_temp  = int(get("temp", 26))
             ac_mode  = get("mode", "cool")

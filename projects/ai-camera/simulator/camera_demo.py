@@ -123,6 +123,7 @@ def generate_frame():
 # ── HTTP 服务器 ──────────────────────────────
 class Handler(BaseHTTPRequestHandler):
     def do_GET(self):
+        global frame_count
         p = urlparse(self.path).path
         q = parse_qs(urlparse(self.path).query)
 
@@ -146,7 +147,6 @@ class Handler(BaseHTTPRequestHandler):
             html_resp(INDEX_HTML)
         
         elif p == "/capture":
-            global frame_count
             frame_count += 1
             jpeg_data = generate_frame()
             self.send_response(200)
@@ -165,7 +165,6 @@ class Handler(BaseHTTPRequestHandler):
             
             try:
                 while True:
-                    global frame_count
                     frame_count += 1
                     jpeg_data = generate_frame()
                     

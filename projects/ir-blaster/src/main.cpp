@@ -128,7 +128,7 @@ bool sendLearnedCode(int idx) {
 }
 
 // ========== 空调控制（美的示例） ==========
-void sendAcCommand(bool power, uint8_t temp = 26, uint8_t mode = kMideaCool, uint8_t fan = kMideaFanAuto) {
+void sendAcCommand(bool power, uint8_t temp = 26, uint8_t mode = kMideaACCool, uint8_t fan = kMideaACFanAuto) {
     ac.setPower(power);
     if (power) {
         ac.setTemp(temp);
@@ -339,7 +339,7 @@ void handleApiAc() {
     int ti = body.indexOf("\"temp\":");
     if (ti >= 0) temp = body.substring(ti + 7, ti + 9).toInt();
     bool heat = body.indexOf("heat") >= 0;
-    sendAcCommand(power, temp, heat ? kMideaHeat : kMideaCool);
+    sendAcCommand(power, temp, heat ? kMideaACHeat : kMideaACCool);
     server.send(200, "application/json",
                 String("{\"ok\":true,\"action\":\"") + lastAction + "\"}");
 }
@@ -408,9 +408,9 @@ void setup() {
     ac.begin();
     // 美的空调初始默认设置
     ac.setPower(false);
-    ac.setMode(kMideaCool);
+    ac.setMode(kMideaACCool);
     ac.setTemp(26);
-    ac.setFan(kMideaFanAuto);
+    ac.setFan(kMideaACFanAuto);
 
     // OLED
     Wire.begin(OLED_SDA, OLED_SCL);

@@ -136,6 +136,17 @@ void setup() {
 // 继电器
 #define RELAY_1         26
 #define RELAY_2         27
+#define RELAY_3         14
+#define RELAY_4         12
+
+// 声音/手势/红外/RF
+#define BUZZER_PIN      25
+#define MIC_PIN         36
+#define PWM_LED_PIN     13
+#define IR_SEND_PIN     19
+#define IR_RECV_PIN     18
+#define RF_TX_PIN       17
+#define RF_RX_PIN       16
 ```
 
 ---
