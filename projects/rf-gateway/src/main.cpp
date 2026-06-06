@@ -182,14 +182,14 @@ void updateOled() {
 void publishHADiscovery() {
     for (int i = 0; i < rfDeviceCount; i++) {
         if (!rfDevices[i].valid) continue;
-        StaticJsonDocument<512> doc;
+        JsonDocument doc;
         String uid = String(DEVICE_ID) + "-" + String(i);
         doc["name"] = rfDevices[i].name;
         doc["unique_id"] = uid;
         doc["command_topic"] = String("home/") + DEVICE_ID + "/" + i + "/set";
         doc["state_topic"]   = String("home/") + DEVICE_ID + "/" + i + "/state";
         doc["retain"] = true;
-        JsonObject dev = doc.createNestedObject("device");
+        JsonObject dev = doc["device"].to<JsonObject>();
         dev["identifiers"][0] = DEVICE_ID;
         dev["name"] = "ESP32 RF 网关";
         dev["manufacturer"] = "Kevin Ten";

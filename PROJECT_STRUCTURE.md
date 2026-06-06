@@ -37,14 +37,22 @@ esp32-ai-projects/
 ├── 📂 projects/               # 📝 具体项目
 │   ├── 📂 ai-camera/          # AI 摄像头项目
 │   ├── 📂 gesture-control/    # 手势识别项目
+│   ├── 📂 ir-blaster/         # IR 红外万能遥控项目
+│   ├── 📂 rf-gateway/         # RF 433MHz 智能网关项目
 │   ├── 📂 smart-home/         # 智能家居项目
 │   ├── 📂 voice-control/      # 语音控制项目
 │   └── 📂 weather-station/    # 气象站项目
+│
+├── 📂 simulator/              # 🖥️ 全项目统一 Python 演示平台
+│   ├── esp32_demo.py
+│   ├── run_demo.bat
+│   └── run_demo.sh
 │
 ├── 📂 docs/                   # 📚 文档
 │   ├── 📄 setup-guide.md      # 环境搭建指南
 │   ├── 📄 upload-guide.md     # 固件烧录指南
 │   ├── 📄 prompt-cheatsheet.md # AI 开发提示词
+│   ├── 📄 verification.md     # 构建和模拟器验证清单
 │   │
 │   └── 📂 guides/             # 详细指南
 │       ├── 📄 hardware-setup.md  # ⭐ 硬件连接指南
@@ -68,6 +76,7 @@ esp32-ai-projects/
 |------|------|------|
 | `platformio.ini` | 构建配置 | 定义开发板、上传速度、依赖库 |
 | `components/pin-config.h` | 引脚定义 | ⭐ 普中 ESP32 引脚配置总表 |
+| `docs/verification.md` | 验证清单 | 固件构建、模拟器语法检查、仓库状态检查 |
 
 ### 组件库
 
@@ -85,6 +94,7 @@ esp32-ai-projects/
 | `docs/guides/hardware-setup.md` | 硬件连接图、引脚分配 |
 | `docs/setup-guide.md` | PlatformIO 环境搭建 |
 | `docs/upload-guide.md` | 固件上传/烧录方法 |
+| `docs/verification.md` | 项目验证命令 |
 | `components/README.md` | 组件使用示例 |
 
 ---
@@ -112,6 +122,10 @@ esp32-ai-projects/
 # 在项目目录下执行
 pio run --target upload
 ```
+
+### 5. 本地验证
+
+参考 `docs/verification.md` 运行固件构建、模拟器语法检查和最终 diff 检查。
 
 ---
 

@@ -127,7 +127,7 @@ void publishHADiscovery() {
 
     // 开关设备
     for (int i = 0; i < 4; i++) {
-        StaticJsonDocument<512> doc;
+        JsonDocument doc;
         String uid = String(DEVICE_ID) + "-" + devices[i].id;
         doc["name"] = (String(DEVICE_NAME) + " " + devices[i].name).c_str();
         doc["unique_id"] = uid;
@@ -138,7 +138,7 @@ void publishHADiscovery() {
         doc["optimistic"] = false;
         doc["retain"] = true;
         // 设备信息（HA设备注册）
-        JsonObject dev = doc.createNestedObject("device");
+        JsonObject dev = doc["device"].to<JsonObject>();
         dev["identifiers"][0] = DEVICE_ID;
         dev["name"] = DEVICE_NAME;
         dev["manufacturer"] = "Kevin Ten";
@@ -153,14 +153,14 @@ void publishHADiscovery() {
 
     // 温度传感器
     {
-        StaticJsonDocument<512> doc;
+        JsonDocument doc;
         doc["name"] = (String(DEVICE_NAME) + " 温度").c_str();
         doc["unique_id"] = String(DEVICE_ID) + "-temp";
         doc["state_topic"] = topicSensor("temperature");
         doc["unit_of_measurement"] = "°C";
         doc["device_class"] = "temperature";
         doc["value_template"] = "{{ value | float }}";
-        JsonObject dev = doc.createNestedObject("device");
+        JsonObject dev = doc["device"].to<JsonObject>();
         dev["identifiers"][0] = DEVICE_ID;
         dev["name"] = DEVICE_NAME;
         String payload;
@@ -171,14 +171,14 @@ void publishHADiscovery() {
 
     // 湿度传感器
     {
-        StaticJsonDocument<512> doc;
+        JsonDocument doc;
         doc["name"] = (String(DEVICE_NAME) + " 湿度").c_str();
         doc["unique_id"] = String(DEVICE_ID) + "-hum";
         doc["state_topic"] = topicSensor("humidity");
         doc["unit_of_measurement"] = "%";
         doc["device_class"] = "humidity";
         doc["value_template"] = "{{ value | float }}";
-        JsonObject dev = doc.createNestedObject("device");
+        JsonObject dev = doc["device"].to<JsonObject>();
         dev["identifiers"][0] = DEVICE_ID;
         dev["name"] = DEVICE_NAME;
         String payload;
@@ -189,14 +189,14 @@ void publishHADiscovery() {
 
     // 人体传感器
     {
-        StaticJsonDocument<512> doc;
+        JsonDocument doc;
         doc["name"] = (String(DEVICE_NAME) + " 人体感应").c_str();
         doc["unique_id"] = String(DEVICE_ID) + "-motion";
         doc["state_topic"] = topicSensor("motion");
         doc["device_class"] = "motion";
         doc["payload_on"] = "ON";
         doc["payload_off"] = "OFF";
-        JsonObject dev = doc.createNestedObject("device");
+        JsonObject dev = doc["device"].to<JsonObject>();
         dev["identifiers"][0] = DEVICE_ID;
         dev["name"] = DEVICE_NAME;
         String payload;
@@ -422,8 +422,8 @@ load();setInterval(load,3000);
 void handleRoot() { server.send(200, "text/html; charset=UTF-8", buildHtml()); }
 
 void handleApiState() {
-    StaticJsonDocument<256> doc;
-    JsonArray arr = doc.createNestedArray("states");
+    JsonDocument doc;
+    JsonArray arr = doc["states"].to<JsonArray>();
     for (int i = 0; i < 4; i++) arr.add(devices[i].state);
     doc["ip"] = WiFi.localIP().toString();
     doc["mqtt"] = mqttOk;

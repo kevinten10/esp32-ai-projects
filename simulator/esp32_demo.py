@@ -24,6 +24,7 @@ import threading
 import time
 import json
 import webbrowser
+import sys
 from datetime import datetime
 from http.server import HTTPServer, BaseHTTPRequestHandler
 from urllib.parse import urlparse, parse_qs
@@ -82,7 +83,9 @@ _log_callbacks = []
 def log(msg: str, level="INFO"):
     ts = datetime.now().strftime("%H:%M:%S")
     line = f"[{ts}] [{level}] {msg}"
-    print(line)
+    console_encoding = sys.stdout.encoding or "utf-8"
+    safe_line = line.encode(console_encoding, errors="replace").decode(console_encoding)
+    print(safe_line)
     for cb in _log_callbacks:
         try: cb(line + "\n")
         except: pass
