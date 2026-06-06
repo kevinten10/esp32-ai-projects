@@ -99,10 +99,28 @@
 // 继电器/舵机
 #define RELAY_1         26
 #define RELAY_2         27
+#define RELAY_3         14
+#define RELAY_4         12
 #define SERVO_1         18      // 也可用作 SPI SCK
 
+// 智能家居传感器
+#define PIR_PIN         34      // GPIO34 (仅输入)
+
 // 蜂鸣器
-#define BUZZER_PIN      2
+#define BUZZER_PIN      25
+
+// 声音/手势控制
+#define MIC_PIN         36      // ADC1_CH0, MAX9814 模拟输出
+#define PWM_LED_PIN     13
+#define APDS_INT_PIN    4       // APDS-9960 中断引脚（可选，ADC2）
+
+// IR 红外遥控
+#define IR_SEND_PIN     19      // 红外发射（三极管驱动）
+#define IR_RECV_PIN     18      // 红外接收（VS1838B）
+
+// RF 433MHz 网关
+#define RF_TX_PIN       17      // STX882/FS1000A DATA
+#define RF_RX_PIN       16      // SRX882/MX-RM-5V DATA
 
 // ==================== 特殊功能引脚 ====================
 
